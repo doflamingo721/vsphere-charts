@@ -10,9 +10,9 @@ entries:
       catalog.cattle.io/release-name: vsphere-csi
     apiVersion: v1
     appVersion: 2.4.1
-    created: "2022-02-16T14:04:51.723972111Z"
+    created: "2022-02-16T14:24:03.934911724Z"
     description: vSphere Cloud Storage Interface (CSI)
-    digest: 102b31eb917e0472b5424fee7fe8f6f1b9aebcc16d62e1cee85bea269e1ffbba
+    digest: f908b36d20c8f12fceb0b1c5056dfe97d1e6be49d09c31334c10b90c23cdce6d
     icon: https://charts.rancher.io/assets/logos/vsphere-csi.svg
     keywords:
     - infrastructure
@@ -26,4 +26,4 @@ entries:
     urls:
     - https://github.com/doflamingo721/vsphere-charts/releases/download/rancher-vsphere-csi-2.4.1-rancher4/rancher-vsphere-csi-2.4.1-rancher4.tgz
     version: 2.4.1-rancher4
-generated: "2022-02-16T14:04:51.723980711Z"
+generated: "2022-02-16T14:24:03.934917525Z"
