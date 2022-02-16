@@ -43,15 +43,6 @@ spec:
                 operator: In
                 values:
                 - "true"
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: "app"
-                    operator: In
-                    values:
-                      - vsphere-csi-controller
-              topologyKey: "kubernetes.io/hostname"         
       {{- end }}
       {{- if .Values.csiController.tolerations }}
       tolerations:
