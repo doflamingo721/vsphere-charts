@@ -43,7 +43,6 @@ spec:
                 operator: In
                 values:
                 - "true"
-        topologyKey: "kubernetes.io/hostname"
       {{- end }}
       {{- if .Values.csiController.tolerations }}
       tolerations:
