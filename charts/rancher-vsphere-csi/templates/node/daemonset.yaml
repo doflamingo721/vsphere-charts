@@ -1,8 +1,9 @@
+# Source: https://github.com/kubernetes-sigs/vsphere-csi-driver
 kind: DaemonSet
 apiVersion: apps/v1
 metadata:
   name: vsphere-csi-node
-  namespace: vmware-system-csi
+  namespace: {{ .Release.Namespace }}
 spec:
   selector:
     matchLabels:
@@ -24,7 +25,7 @@ spec:
       dnsPolicy: "ClusterFirstWithHostNet"
       containers:
         - name: node-driver-registrar
-          image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.3.0
+          image: "{{ template "system_default_registry" . }}{{ .Values.csiNode.image.nodeDriverRegistrar.repository }}:{{ .Values.csiNode.image.nodeDriverRegistrar.tag }}"
           args:
             - "--v=5"
             - "--csi-address=$(ADDRESS)"
@@ -33,7 +34,7 @@ spec:
             - name: ADDRESS
               value: /csi/csi.sock
             - name: DRIVER_REG_SOCK_PATH
-              value: /var/lib/kubelet/plugins/csi.vsphere.vmware.com/csi.sock
+              value: {{ .Values.csiNode.prefixPath }}/var/lib/kubelet/plugins/csi.vsphere.vmware.com/csi.sock
           volumeMounts:
             - name: plugin-dir
               mountPath: /csi
@@ -47,7 +48,7 @@ spec:
               - --mode=kubelet-registration-probe
             initialDelaySeconds: 3
         - name: vsphere-csi-node
-          image: gcr.io/cloud-provider-vsphere/csi/release/driver:v2.4.1
+          image: "{{ template "system_default_registry" . }}{{ .Values.csiNode.image.repository }}:{{ .Values.csiNode.image.tag }}"
           args:
             - "--fss-name=internal-feature-states.csi.vsphere.vmware.com"
             - "--fss-namespace=$(CSI_NAMESPACE)"
@@ -85,7 +86,7 @@ spec:
             - name: plugin-dir
               mountPath: /csi
             - name: pods-mount-dir
-              mountPath: /var/lib/kubelet
+              mountPath: {{ .Values.csiNode.prefixPath }}/var/lib/kubelet
               # needed so that any mounts setup inside this container are
               # propagated back to the host machine.
               mountPropagation: "Bidirectional"
@@ -108,7 +109,7 @@ spec:
             periodSeconds: 5
             failureThreshold: 3
         - name: liveness-probe
-          image: k8s.gcr.io/sig-storage/livenessprobe:v2.4.0
+          image: "{{ template "system_default_registry" . }}{{ .Values.csiNode.image.livenessProbe.repository }}:{{ .Values.csiNode.image.livenessProbe.tag }}"
           args:
             - "--v=4"
             - "--csi-address=/csi/csi.sock"
@@ -118,15 +119,15 @@ spec:
       volumes:
         - name: registration-dir
           hostPath:
-            path: /var/lib/kubelet/plugins_registry
+            path: {{ .Values.csiNode.prefixPath }}/var/lib/kubelet/plugins_registry
             type: Directory
         - name: plugin-dir
           hostPath:
-            path: /var/lib/kubelet/plugins/csi.vsphere.vmware.com
+            path: {{ .Values.csiNode.prefixPath }}/var/lib/kubelet/plugins/csi.vsphere.vmware.com
             type: DirectoryOrCreate
         - name: pods-mount-dir
           hostPath:
-            path: /var/lib/kubelet
+            path: {{ .Values.csiNode.prefixPath }}/var/lib/kubelet
             type: Directory
         - name: device-dir
           hostPath:
