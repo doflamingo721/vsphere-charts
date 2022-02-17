@@ -83,7 +83,7 @@ csiNode:
     livenessProbe:
       repository: rancher/mirrored-sig-storage-livenessprobe
       tag: v2.4.0
-
+  nodeSelector: {}
 storageClass:
   enabled: true
   allowVolumeExpansion: false

@@ -18,8 +18,14 @@ spec:
         app: vsphere-csi-node
         role: vsphere-csi
     spec:
+      {{- if .Values.csiNode.nodeSelector }}
       nodeSelector:
+      {{- with .Values.csiNode.nodeSelector }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- else }}
         kubernetes.io/os: linux
+      {{- end }}
       serviceAccountName: vsphere-csi-node
       hostNetwork: true
       dnsPolicy: "ClusterFirstWithHostNet"
