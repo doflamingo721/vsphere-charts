@@ -4,19 +4,19 @@ entries:
   - annotations:
       catalog.cattle.io/certified: rancher
       catalog.cattle.io/display-name: vSphere CSI
+      catalog.cattle.io/kube-version: '>= 1.19.0-0 < 1.23.0-0'
       catalog.cattle.io/namespace: kube-system
       catalog.cattle.io/os: linux
-      catalog.cattle.io/rancher-version: '>= 2.6.0-0 <= 2.6.99-0'
+      catalog.cattle.io/rancher-version: '>= 2.6.0-0 <= 2.6.100-0'
       catalog.cattle.io/release-name: vsphere-csi
     apiVersion: v1
-    appVersion: 2.4.1
-    created: "2022-02-16T14:51:27.160273184Z"
+    appVersion: 2.4.1-rancher1
+    created: "2022-02-17T20:44:00.880110831Z"
     description: vSphere Cloud Storage Interface (CSI)
-    digest: f81c1ac731b89ef71cf04acc68fa6e7724e5e169e9e88d4d25d2fc74860a4fcb
+    digest: 71424a409842293e1bf868898e240288569478204b373cd4a66239cf2bf393dd
     icon: https://charts.rancher.io/assets/logos/vsphere-csi.svg
     keywords:
     - infrastructure
-    kubeVersion: 1.19 - 1.22
     maintainers:
     - email: caleb@rancher.com
       name: Rancher
@@ -26,4 +26,4 @@ entries:
     urls:
     - https://github.com/doflamingo721/vsphere-charts/releases/download/rancher-vsphere-csi-2.4.1-rancher5/rancher-vsphere-csi-2.4.1-rancher5.tgz
     version: 2.4.1-rancher5
-generated: "2022-02-16T14:51:27.160279084Z"
+generated: "2022-02-17T20:44:00.880118131Z"
