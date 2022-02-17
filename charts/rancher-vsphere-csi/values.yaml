@@ -69,6 +69,8 @@ improvedCsiIdempotency:
   enabled: false
 improvedVolumeTopology:
   enabled: false
+csi-windows-support:
+  enabled: false
 
 csiNode:
   prefixPath: ""
